@@ -70,3 +70,17 @@ def add_columns(df, columns_dict):
     for loc, (name, values) in columns_dict.items():
         df.insert(loc, name, values, allow_duplicates=False)
     return "Warning! new columns have been added to the input DataFrame!"
+
+def csv_to_df(path, num_rows):
+    """Loads a large csv file into a dataframe. Uses 'pandas.read_csv' with argument chunksize.
+
+    Args:
+        path (string): path to the csv file.
+        num_rows (int): number of rows of the csv file that are loaded into memory.
+    Returns:
+        (DataFrame) dataframe that contains data from the input csv file.
+    """
+    reader = pd.read_csv(path, chunksize=num_rows)
+    return pd.concat(reader)
+
+
