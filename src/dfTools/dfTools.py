@@ -11,14 +11,28 @@ def select_by_colvals(df, col_val_dict):
         (DataFrame) a dataframe with the rows from the input dataframe filtered by the given values 
         of the selected columns.
     """
+    mask = _buildMask(df, col_val_dict)
+    return df[mask]
+
+def _buildMask(df, col_val_dict):
+    """Creates a mask filtering rows of a datafram by column values.
+
+    Args:
+        df (DataFrame): the input dataframe.
+        col_dict (dict): dictionary of column names (dict keys) and values (dict values), values
+        can be non-list (numbers, string, etc.) or any list-like data type.
+    Returns:
+        (Series) a pandas Series indicating rows of the dataframe that match the selection criteria.
+    """
     mask = pd.Series([True]*len(df.index))
+    print(type(mask))
     for name, values in col_val_dict.items():
         try:
             mask = mask & (df[name].isin(values))
         except TypeError:
             mask = mask & (df[name] == values)
 
-    return df[mask]
+    return mask
 
 def rename_columns(df, colnames_dict, inplace=False):
     """Renames columns in a dataframe. Uses 'pandas.DataFrame.rename'.
