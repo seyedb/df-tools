@@ -5,7 +5,7 @@ def select_by_colvals(df, col_val_dict):
 
     Args:
         df (DataFrame): the input dataframe.
-        col_val_dict (dict): dictionary of column names (dict keys) and values (dict values), values
+        col_val_dict (dict): dictionary of column names (dict keys) and values (dict values), values\
         can be non-list (numbers, string, etc.) or any list-like data type.
     Returns:
         (DataFrame) a dataframe with the rows from the input dataframe filtered by the given values 
@@ -19,7 +19,7 @@ def apply_func(df, col_val_dict, func, args=(), **kwds):
 
     Args:
         df (DataFrame): the input dataframe.
-        col_val_dict (dict): dictionary of column names (dict keys) and values (dict values), values
+        col_val_dict (dict): dictionary of column names (dict keys) and values (dict values), values\
         can be non-list (numbers, string, etc.) or any list-like data type.
         func (function): function to apply to colums or rows of the extracted subset.
         args (tuple): positional input arguments to the func.
@@ -36,7 +36,7 @@ def _buildMask(df, col_val_dict):
 
     Args:
         df (DataFrame): the input dataframe.
-        col_val_dict (dict): dictionary of column names (dict keys) and values (dict values), values
+        col_val_dict (dict): dictionary of column names (dict keys) and values (dict values), values\
         can be non-list (numbers, string, etc.) or any list-like data type.
     Returns:
         (Series) a pandas Series indicating rows of the dataframe that match the selection criteria.
@@ -59,7 +59,7 @@ def rename_columns(df, colnames_dict, inplace=False):
         colnames_dict (dict): dictionary of existing column names as keys and new names as values.
         inplace (bool): whether or not rename columns inplace.
     Returns:
-        (DataFrame) if inplace is True the input dataframe is modified, otherwise a new dataframe is 
+        (DataFrame) if inplace is True the input dataframe is modified, otherwise a new dataframe is\
         returned with new column names.
     """
     if inplace:
@@ -77,7 +77,7 @@ def delete_columns(df, colnames_list, inplace=False):
         colnames_list (list of string): list of column names to be deleted.
         inplace (bool): whether or not delete columns inplace.
     Returns:
-        (DataFrame) if inplace is True the input dataframe is modified, otherwise a new dataframe is 
+        (DataFrame) if inplace is True the input dataframe is modified, otherwise a new dataframe is\
         returned without the specified columns.
     """
     if inplace:
@@ -92,8 +92,8 @@ def add_columns(df, columns_dict):
 
     Args:
         df (DataFrame): the input dataframe.
-        columns_dict (dict): dictionary of the columns to be added. keys are locations (indices), values
-        are tuples of length 2, the first element is the column name, the second element is a list containing 
+        columns_dict (dict): dictionary of the columns to be added. keys are locations (indices), values\
+        are tuples of length 2, the first element is the column name, the second element is a list containing\
         the column data.
     Returns:
         (DataFrame) the input dataframe with new columns.
