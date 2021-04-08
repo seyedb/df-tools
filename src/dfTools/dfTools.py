@@ -5,7 +5,7 @@ def select_by_colvals(df, col_val_dict):
 
     Args:
         df (DataFrame): the input dataframe.
-        col_dict (dict): dictionary of column names (dict keys) and values (dict values), values
+        col_val_dict (dict): dictionary of column names (dict keys) and values (dict values), values
         can be non-list (numbers, string, etc.) or any list-like data type.
     Returns:
         (DataFrame) a dataframe with the rows from the input dataframe filtered by the given values 
@@ -14,12 +14,29 @@ def select_by_colvals(df, col_val_dict):
     mask = _buildMask(df, col_val_dict)
     return df[mask]
 
+def apply_func(df, col_val_dict, func, args=(), **kwds):
+    """Applies a function to a subset of a dataframe filtered by column values. Uses 'pandas.DataFrame.apply'.
+
+    Args:
+        df (DataFrame): the input dataframe.
+        col_val_dict (dict): dictionary of column names (dict keys) and values (dict values), values
+        can be non-list (numbers, string, etc.) or any list-like data type.
+        func (function): function to apply to colums or rows of the extracted subset.
+        args (tuple): positional input arguments to the func.
+        **kwds: additional keyword arguments that can be passed to func.
+    Returns:
+        (DataFrame) the input dataframe with a specified subset of its elements is modified by the input function. 
+    """
+    mask = _buildMask(df, col_val_dict)
+    df[mask] = df[mask].apply(func, args=args, **kwds)
+    return df
+
 def _buildMask(df, col_val_dict):
     """Creates a mask filtering rows of a datafram by column values.
 
     Args:
         df (DataFrame): the input dataframe.
-        col_dict (dict): dictionary of column names (dict keys) and values (dict values), values
+        col_val_dict (dict): dictionary of column names (dict keys) and values (dict values), values
         can be non-list (numbers, string, etc.) or any list-like data type.
     Returns:
         (Series) a pandas Series indicating rows of the dataframe that match the selection criteria.
