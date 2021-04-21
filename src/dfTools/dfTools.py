@@ -42,7 +42,6 @@ def _buildMask(df, col_val_dict):
         (Series) a pandas Series indicating rows of the dataframe that match the selection criteria.
     """
     mask = pd.Series([True]*len(df.index))
-    print(type(mask))
     for name, values in col_val_dict.items():
         try:
             mask = mask & (df[name].isin(values))
